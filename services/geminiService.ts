@@ -1,7 +1,12 @@
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
+let ai: GoogleGenAI | null = null;
+const initAI = () => {
+  if (!ai) {
+    ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  }
+  return ai;
+};
 const MODEL_NAME = 'gemini-3-flash-preview';
 
 const SYSTEM_INSTRUCTION = `
@@ -18,7 +23,8 @@ let chatSession: Chat | null = null;
 
 export const initializeChat = (): Chat => {
   if (!chatSession) {
-    chatSession = ai.chats.create({
+    const aiInstance = initAI();
+    chatSession = aiInstance.chats.create({
       model: MODEL_NAME,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
