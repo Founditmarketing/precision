@@ -21,7 +21,6 @@ const App: React.FC = () => {
   return (
     <HashRouter>
       <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
-        <EmergencyBanner />
         <Navbar />
         <main className="flex-grow">
           <Hero onOpenEstimateModal={() => setIsModalOpen(true)} />
