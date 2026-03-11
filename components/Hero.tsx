@@ -21,7 +21,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenEstimateModal }) => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero_bg_roof_1773241882276.png"
+          src="/images/hero_bg_real_1773263946829.png"
           alt="Roofing Background"
           className="w-full h-full object-cover opacity-30"
         />

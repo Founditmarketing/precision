@@ -48,15 +48,15 @@ const ProjectCard = ({ project }: { project: any }) => {
 
 const Gallery: React.FC = () => {
   const projects = [
-    { id: 1, title: 'Modern Estate Re-roof', cat: 'Residential', img: '/images/modern_estate_roof_1773241896985.png' },
-    { id: 2, title: 'Downtown Commercial Flat', cat: 'Commercial', img: '/images/commercial_flat_roof_1773241912440.png' },
-    { id: 3, title: 'Historic Truss Repair', cat: 'Structural', img: '/images/historic_truss_repair_1773241932669.png' },
-    { id: 4, title: 'Luxury Metal Seam', cat: 'Residential', img: '/images/luxury_metal_roof_1773241947838.png' },
-    { id: 5, title: 'Historic Church Metal Roof', cat: 'Commercial/Specialty', img: '/images/church_metal_roof_1773243075423.png' },
-    { id: 6, title: 'Suburban Storm Restore', cat: 'Insurance', img: '/images/storm_restore_roof_1773241975430.png' },
-    { id: 7, title: 'Custom Cedar Shake', cat: 'Residential', img: '/images/cedar_shake_roof_1773244535166.png' },
-    { id: 8, title: 'Integrated Solar System', cat: 'Eco-Friendly', img: '/images/solar_integrated_roof_1773244552212.png' },
-    { id: 9, title: 'Luxury Apartment Complex', cat: 'Commercial', img: '/images/apartment_complex_roof_1773244565820.png' },
+    { id: 1, title: 'Modern Estate Re-roof', cat: 'Residential', img: '/images/modern_estate_real_1773263958151.png' },
+    { id: 2, title: 'Downtown Commercial Flat', cat: 'Commercial', img: '/images/commercial_flat_real_1773263970648.png' },
+    { id: 3, title: 'Historic Truss Repair', cat: 'Structural', img: '/images/historic_truss_real_1773263992759.png' },
+    { id: 4, title: 'Luxury Metal Seam', cat: 'Residential', img: '/images/luxury_metal_real_1773264008742.png' },
+    { id: 5, title: 'Historic Church Metal Roof', cat: 'Commercial/Specialty', img: '/images/church_metal_real_1773264021841.png' },
+    { id: 6, title: 'Suburban Storm Restore', cat: 'Insurance', img: '/images/storm_restore_real_1773264044464.png' },
+    { id: 7, title: 'Custom Cedar Shake', cat: 'Residential', img: '/images/cedar_shake_real_1773264060099.png' },
+    { id: 8, title: 'Integrated Solar System', cat: 'Eco-Friendly', img: '/images/solar_real_1773264076380.png' },
+    { id: 9, title: 'Luxury Apartment Complex', cat: 'Commercial', img: '/images/apartment_real_1773264090844.png' },
   ];
 
   return (

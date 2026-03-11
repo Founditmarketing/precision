@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const Statistics: React.FC = () => {
     const stats = [
-        { value: 5000, suffix: '+', label: 'Roofs Secured' },
+        { value: 1000, suffix: '+', label: 'Roofs Secured' },
         { value: 20, suffix: '+', label: 'Years Experience' },
         { value: 24, suffix: '/7', label: 'Emergency Deploy' },
         { value: 100, suffix: '%', label: 'Client Satisfaction' },
