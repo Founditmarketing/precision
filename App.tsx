@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Statistics from './components/Statistics';
 import TrustBadges from './components/TrustBadges';
 import Services from './components/Services';
 import ProcessTimeline from './components/ProcessTimeline';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Navbar />
         <main className="flex-grow">
           <Hero onOpenEstimateModal={() => setIsModalOpen(true)} />
+          <Statistics />
           <TrustBadges />
           <Services />
           <ProcessTimeline />

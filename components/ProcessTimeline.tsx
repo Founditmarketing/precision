@@ -1,5 +1,6 @@
 import React from 'react';
 import { Camera, FileText, Hammer, Trash2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ProcessTimeline: React.FC = () => {
     const steps = [
@@ -30,37 +31,49 @@ const ProcessTimeline: React.FC = () => {
     ];
 
     return (
-        <section className="py-24 bg-white border-t border-slate-100 relative overflow-hidden">
+        <section className="py-24 bg-[#050810] border-t border-white/5 relative overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center max-w-3xl mx-auto mb-16"
+                >
                     <h2 className="text-brand-primary font-bold tracking-widest uppercase mb-3 text-sm">How We Work</h2>
-                    <h3 className="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-6">The Precision Process</h3>
-                    <p className="text-slate-600 text-lg">
+                    <h3 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">The Precision Process</h3>
+                    <p className="text-slate-400 text-lg">
                         A seamless, stress-free experience from the first call to the final nail. We respect your time and your property.
                     </p>
-                </div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {steps.map((step, index) => (
-                        <div key={index} className="relative group">
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.15, duration: 0.5 }}
+                            className="relative group "
+                        >
                             {/* Connector line - hidden on mobile, visible on lg and up */}
                             {index < steps.length - 1 && (
-                                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-[2px] bg-slate-200 -z-10 group-hover:bg-brand-primary/50 transition-colors duration-500"></div>
+                                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-[2px] bg-slate-800 -z-10 group-hover:bg-brand-primary/50 transition-colors duration-500"></div>
                             )}
 
                             <div className="flex flex-col items-center text-center">
-                                <div className="w-24 h-24 rounded-full bg-brand-dark flex items-center justify-center relative shadow-xl border-4 border-white mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-brand-primary">
+                                <div className="w-24 h-24 rounded-full bg-slate-900 flex items-center justify-center relative shadow-2xl border-4 border-[#050810] mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-brand-primary">
                                     {step.icon}
-                                    <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white text-brand-dark font-bold flex items-center justify-center shadow-md border border-slate-100">
+                                    <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-800 text-brand-primary border border-slate-700 font-bold flex items-center justify-center shadow-md">
                                         {step.num}
                                     </div>
                                 </div>
-                                <h4 className="text-xl font-bold text-brand-dark mb-3">{step.title}</h4>
-                                <p className="text-slate-500 leading-relaxed px-2">
+                                <h4 className="text-xl font-bold text-white mb-3">{step.title}</h4>
+                                <p className="text-slate-400 leading-relaxed px-2">
                                     {step.desc}
                                 </p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>

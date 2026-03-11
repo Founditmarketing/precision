@@ -1,10 +1,55 @@
 import React from 'react';
 import { SectionId } from '../types';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+
+const ProjectCard = ({ project }: { project: any }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [15, -15]);
+  const rotateY = useTransform(x, [-100, 100], [-15, 15]);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    x.set(event.clientX - rect.left - rect.width / 2);
+    y.set(event.clientY - rect.top - rect.height / 2);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      style={{ perspective: 1000 }}
+      className="group relative cursor-pointer"
+    >
+      <motion.div
+        style={{ rotateX, rotateY }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative overflow-hidden rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.8)] border border-white/5 bg-brand-dark"
+      >
+        <img
+          src={project.img}
+          alt={project.title}
+          className="w-full h-72 object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 z-10 pointer-events-none">
+          <span className="text-brand-primary text-xs font-bold uppercase tracking-wider mb-2 drop-shadow-md">{project.cat}</span>
+          <h4 className="text-xl font-bold text-white drop-shadow-lg">{project.title}</h4>
+        </div>
+        {/* Glow effect on hover */}
+        <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/10 transition-colors duration-500 z-0 pointer-events-none mix-blend-overlay"></div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Gallery: React.FC = () => {
   const projects = [
     { id: 1, title: 'Modern Estate Re-roof', cat: 'Residential', img: '/images/modern_estate_roof_1773241896985.png' },
-    { id: 2, title: 'Downtown Commercial Flat', cat: 'Commercial', img: '/images/commercial_flat_roof_1773241912440.png' }, // Portrait
+    { id: 2, title: 'Downtown Commercial Flat', cat: 'Commercial', img: '/images/commercial_flat_roof_1773241912440.png' },
     { id: 3, title: 'Historic Truss Repair', cat: 'Structural', img: '/images/historic_truss_repair_1773241932669.png' },
     { id: 4, title: 'Luxury Metal Seam', cat: 'Residential', img: '/images/luxury_metal_roof_1773241947838.png' },
     { id: 5, title: 'Historic Church Metal Roof', cat: 'Commercial/Specialty', img: '/images/church_metal_roof_1773243075423.png' },
@@ -15,31 +60,34 @@ const Gallery: React.FC = () => {
   ];
 
   return (
-    <section id={SectionId.PROJECTS} className="py-24 bg-brand-dark text-white">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-800 pb-8">
+    <section id={SectionId.PROJECTS} className="py-24 bg-[#030509] text-white overflow-hidden">
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-8"
+        >
           <div className="max-w-xl">
             <h2 className="text-brand-primary font-bold tracking-widest uppercase mb-3 text-sm">Featured Projects</h2>
             <h3 className="text-4xl font-heading font-bold">Proof of Precision</h3>
           </div>
-          <button className="hidden md:block text-brand-primary font-bold hover:text-white transition-colors mt-4 md:mt-0">
+          <button className="hidden md:block text-slate-400 hover:text-brand-primary transition-colors mt-4 md:mt-0 font-bold uppercase tracking-wide text-sm">
             View All Projects &rarr;
           </button>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <div key={project.id} className="group relative overflow-hidden rounded-xl cursor-pointer">
-              <img
-                src={project.img}
-                alt={project.title}
-                className="w-full h-72 object-cover transform group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="text-brand-primary text-xs font-bold uppercase tracking-wider mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.cat}</span>
-                <h4 className="text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">{project.title}</h4>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              <ProjectCard project={project} />
+            </motion.div>
           ))}
         </div>
 

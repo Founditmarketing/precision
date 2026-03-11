@@ -1,6 +1,7 @@
 import React from 'react';
 import { Home, Building2, Wrench, Ruler, Umbrella, PenTool } from 'lucide-react';
 import { ServiceItem, SectionId } from '../types';
+import { motion } from 'framer-motion';
 
 const Services: React.FC = () => {
   const services: ServiceItem[] = [
@@ -37,30 +38,39 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id={SectionId.SERVICES} className="py-24 bg-brand-light relative">
+    <section id={SectionId.SERVICES} className="py-24 bg-[#0a0f18] relative border-b border-white/5">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <h2 className="text-brand-primary font-bold tracking-widest uppercase mb-3 text-sm">Our Expertise</h2>
-          <h3 className="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-6">Comprehensive Roofing Solutions</h3>
-          <p className="text-slate-600 text-lg">
+          <h3 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">Comprehensive Roofing Solutions</h3>
+          <p className="text-slate-400 text-lg">
             We don't just cover buildings; we engineer protection. From minor repairs to massive structural overhauls, Precision delivers.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div 
+            <motion.div
               key={index}
-              className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-brand-primary/10 transition-all duration-300 border border-slate-100 hover:-translate-y-2"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group bg-slate-900 border-t-2 border-slate-800 p-8 rounded-2xl shadow-xl hover:shadow-[0_0_30px_rgba(245,158,11,0.05)] hover:border-brand-primary/30 transition-all duration-300 hover:-translate-y-2"
             >
-              <div className="w-16 h-16 bg-brand-light rounded-xl flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-colors">
+              <div className="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-brand-dark transition-colors">
                 {service.icon}
               </div>
-              <h4 className="text-xl font-bold text-brand-dark mb-3 group-hover:text-brand-primary transition-colors">{service.title}</h4>
-              <p className="text-slate-500 leading-relaxed">
+              <h4 className="text-xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors">{service.title}</h4>
+              <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

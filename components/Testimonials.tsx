@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Testimonials: React.FC = () => {
     const reviews = [
@@ -24,38 +25,50 @@ const Testimonials: React.FC = () => {
     ];
 
     return (
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-24 bg-[#0B0F19] relative overflow-hidden border-t border-white/5">
             {/* Decorative background element */}
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="text-center max-w-3xl mx-auto mb-16"
+                >
                     <h2 className="text-brand-primary font-bold tracking-widest uppercase mb-3 text-sm">Client Success</h2>
-                    <h3 className="text-4xl md:text-5xl font-heading font-bold text-brand-dark mb-6">Don't Just Take Our Word For It</h3>
-                </div>
+                    <h3 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">Don't Just Take Our Word For It</h3>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {reviews.map((review, i) => (
-                        <div key={i} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:shadow-xl transition-shadow relative">
-                            <Quote className="absolute top-6 right-6 w-12 h-12 text-slate-100 rotate-180" />
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ delay: i * 0.15, duration: 0.5 }}
+                            className="bg-[#050810] p-8 rounded-2xl shadow-xl border border-slate-800 hover:border-brand-primary/50 hover:shadow-[0_0_20px_rgba(245,158,11,0.1)] transition-all relative group"
+                        >
+                            <Quote className="absolute top-6 right-6 w-12 h-12 text-slate-800/50 rotate-180 group-hover:text-brand-primary/20 transition-colors duration-300" />
                             <div className="flex gap-1 mb-6">
                                 {[...Array(review.stars)].map((_, j) => (
                                     <Star key={j} className="w-5 h-5 fill-brand-primary text-brand-primary" />
                                 ))}
                             </div>
-                            <p className="text-slate-700 leading-relaxed mb-8 italic relative z-10">
+                            <p className="text-slate-300 leading-relaxed mb-8 italic relative z-10 group-hover:text-white transition-colors">
                                 "{review.text}"
                             </p>
-                            <div className="flex items-center gap-4 border-t border-slate-100 pt-6">
-                                <div className="w-12 h-12 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold text-lg">
+                            <div className="flex items-center gap-4 border-t border-slate-800 pt-6">
+                                <div className="w-12 h-12 rounded-full bg-brand-primary text-brand-dark flex items-center justify-center font-bold text-lg shadow-[0_0_15px_rgba(245,158,11,0.5)]">
                                     {review.name.charAt(0)}
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-brand-dark">{review.name}</h4>
-                                    <p className="text-sm text-slate-500">{review.role}</p>
+                                    <h4 className="font-bold text-white">{review.name}</h4>
+                                    <p className="text-sm text-brand-primary uppercase font-bold tracking-wider text-[10px]">{review.role}</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
